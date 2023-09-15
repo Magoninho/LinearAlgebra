@@ -8,9 +8,9 @@ A = [
 
 
 B = [
-	[2, 5],
-	[6, 7],
-	[1, 8]
+	[2],
+	[6],
+	[1]
 ]
 
 class LinearAlgebra:
@@ -135,16 +135,16 @@ class LinearAlgebra:
 		return Matrix(rows, cols, reducted_matrix)
 	
 
-	def times(self, a, b):
+	def dot(self, a, b):
 
 		# Se duas matrizes forem multiplicadas.
 
 		if isinstance(a, Matrix) and isinstance(b, Matrix):
-			rows_a = len(a.get_matrix())
-			cols_a = len(a.get_matrix()[0])
+			rows_a = a.rows
+			cols_a = a.cols
 
-			rows_b = len(b.get_matrix())
-			cols_b = len(b.get_matrix()[0])
+			rows_b = b.rows
+			cols_b = b.cols
 
 			if rows_b != cols_a:
 				raise ValueError("Erro: Matrizes não encaixam para multiplicação! Estude mais!")
@@ -172,34 +172,17 @@ class LinearAlgebra:
 
 			return Matrix(len(result), len(result[0]), result)
 
-		# Se uma escalar for multiplicada por uma matriz
-
-		elif isinstance(a, (int, float)) and isinstance(b, Matrix):
-			rows_b = len(b.get_matrix())
-			cols_b = len(b.get_matrix()[0])
-
-			for i in range(rows_b):
-				for j in range(cols_b):
-					b.set(i, j, b.get(i, j) * a)
-
-			return b
 		
-		# Se uma escalar for multiplicada por um vetor
 		
-		elif isinstance(a, (int, float)) and isinstance(b, Vector):
-			rows_b = len(b.get_elements())
-
-			for i in range(rows_b):
-				for j in range(cols_b):
-					b.set(i, j, b.get(i, j) * a)
-
-			return b
+		
+		
+		# Se uma matriz for multiplicada por um vetor.
 		
 		elif isinstance(a, Matrix) and isinstance(b, Vector):
-			rows_a = len(a.get_matrix())
-			cols_a = len(a.get_matrix()[0])
+			rows_a = a.rows
+			cols_a = a.cols
 
-			rows_b = len(b.get_elements())
+			rows_b = b.dim
 
 			if cols_a != rows_b:
 				raise ValueError("Erro: Matriz fornecida não possui número de colunas igual ao número de linhas do vetor. Estude mais!")
@@ -208,17 +191,94 @@ class LinearAlgebra:
 			for _ in range(rows_a):
 				result.append(0)
 			
-			print(b.get_elements())
 			for i in range(rows_a):
 				for j in range(cols_a):
 					result[i] += a.get_matrix()[i][j] * b.get_elements()[j]
 
 			return Matrix(len(result), 1, result)
-		
-		# Se nenhuma dessas combinações for fornecida
-		else:
-			raise ValueError("Erro: Talvez não esteja multiplicando na ordem certa. (Escalar x Matriz/Vetor), (Matriz x Vetor)")
 	
+
+	def times(self, a, b) -> Matrix | Vector:
+		"""
+		matriz - matriz (v)
+		matriz - vetor (v)
+		escalar - matriz (v)
+		escalar - vetor (v)
+
+		"""
+		# Se duas matrizes forem multiplicadas elemento a elemento
+
+		if isinstance(a, Matrix) and isinstance(b, Matrix):
+			rows_a = a.rows
+			cols_a = a.cols
+
+			rows_b = b.rows
+			cols_b = b.cols
+
+			if rows_a != rows_b or cols_a != cols_b:
+				raise ValueError("Erro: Não é possivel multiplicar essas matrizes elemento a elemento. Não possuem as mesmas ordens. Estude mais!")
+			
+			result = []
+			for i in range(rows_a):
+				result.append([])
+				for j in range(cols_a):
+					result[i].append(0)
+			
+			for i in range(rows_a):
+				for j in range(cols_a):
+					result[i][j] = a.get(i, j) * b.get(i, j)
+			
+			return Matrix(len(result), len(result[0]), result)
+					
+			
+		# Se uma escalar for multiplicada por um vetor
+		
+		elif isinstance(a, (int, float)) and isinstance(b, Vector):
+			rows_b = b.dim
+
+			for i in range(rows_b):
+				b.set(i, b.get(i) * a)
+
+			return b
+			
+		# Se uma escalar for multiplicada por uma matriz
+
+		elif isinstance(a, (int, float)) and isinstance(b, Matrix):
+			rows_b = b.rows
+			cols_b = b.cols
+
+			for i in range(rows_b):
+				for j in range(cols_b):
+					b.set(i, j, b.get(i, j) * a)
+
+			return b
+		
+		# Se uma matriz for multiplicada por um vetor.
+		
+		elif isinstance(a, Matrix) and isinstance(b, Vector):
+			rows_a = a.rows
+			cols_a = a.cols
+
+			rows_b = b.dim
+
+			if rows_a != rows_b or cols_a != 1:
+				raise ValueError("Erro: Não é possivel multiplicar essas matrizes elemento a elemento. Não possuem as mesmas ordens. Estude mais!")
+			
+			result = []
+			for i in range(rows_a):
+				result.append([])
+				for j in range(cols_a):
+					result[i].append(0)
+
+			for i in range(rows_a):
+				element1 = a.get(i, 0)
+				element2 = b.get(i)
+
+				result[i][0] = element1 * element2
+
+			return Matrix(len(result), len(result[0]), result)
+
+
 	def print_matrix(self, matrix):
 		for row in matrix.get_matrix():
 			print(row)
@@ -241,4 +301,4 @@ meu_vetor1 = Vector(3, [1, 2, 3])
 meu_vetor2 = Vector(3, [3, 2, 1])
 
 # linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
-linear.print_matrix(linear.times(minha_matriz, meu_vetor1))
+linear.print_vector(linear.times(2, meu_vetor1))
