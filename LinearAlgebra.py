@@ -28,48 +28,52 @@ class LinearAlgebra:
 
 	def sum(self, a, b):
 
-		rows = a.get_elements()
-		cols = a.get_elements()
-
-		if len(a) != len(b) and len(a[0]) != len(b[0]):
-			print("Erro: Matrizes/Vetores com ordens diferentes! Estude mais!")
-			return
-		
-
 		# Se forem dois vetores sendo somados
 		if isinstance(a, Vector) and isinstance(b, Vector):
-			arr = []
-			for i in range(len(a)):
-				arr.append([])
-				for j in range(len(a)):
-					arr[i].append(0)
-			final_sum = Vector(len(a), arr)
+			rows_a = len(a.get_elements())
+			rows_b = len(b.get_elements())
 
-			final_sum.set(0, 1, 1)
-			for i in range(len(a)):
-				for j in range(len(a)):
-					final_sum.set(i, j, a[i][j] + b[i][j])
+			if rows_a != rows_b and cols_a != cols_b:
+				raise ValueError("Erro: Vetores com ordens diferentes! Estude mais!")
+		
+
+			arr = []
+			for i in range(rows_a):
+				arr.append(0)
+			final_sum = Vector(rows_a, arr)
+
+			for i in range(rows_a):
+				final_sum.set(i, a.get_elements()[i] + b.get_elements()[i])
 
 			return final_sum
 
 		# Se forem matrizes
 		else:
+
+			rows_a = len(a.get_matrix())
+			cols_a = len(a.get_matrix()[0])
+
+			rows_b = len(b.get_matrix())
+			cols_b = len(b.get_matrix()[0])
+
+			if rows_a != rows_b and cols_a != cols_b:
+				raise ValueError("Erro: Matrizes com ordens diferentes! Estude mais!")
+
 			# Somando os elementos
 
 			# Criando um array para ser passado para a matriz final_sum,
 			# onde vai ser armazenado a soma das duas matrizes.
 			arr = []
-			for i in range(len(a)):
+			for i in range(rows_a):
 				arr.append([])
-				for j in range(len(a)):
+				for j in range(cols_a):
 					arr[i].append(0)
-			final_sum = Matrix(len(a), len(a), arr)
+			final_sum = Matrix(rows_a, cols_a, arr)
 
-			final_sum.set(0, 1, 1)
-			for i in range(len(a)):
-				for j in range(len(a)):
-					final_sum.set(i, j, a[i][j] + b[i][j])
 
+			for i in range(rows_a):
+				for j in range(cols_a):
+					final_sum.set(i, j, a.get_matrix()[i][j] + b.get_matrix()[i][j])
 			return final_sum
 
 	def gauss(self, a):
@@ -94,9 +98,7 @@ class LinearAlgebra:
 			# Mesmo se depois de todas essas trocas de linha, o pivô continuar zero,
 			# então a matriz não pode ser escalonada
 			if pivot == 0:
-				print("Não foi possível escalonar a matriz. Sistema Impossível.")
-				exit()
-				return None
+				raise ValueError("Não foi possível escalonar a matriz. Sistema Impossível.")
 
 			# Se o pivô inicial não for zero, então podemos continuar
 			# Precisamos dividir toda a linha atual pelo pivô, a fim de transformar o pivô em 1
@@ -134,8 +136,19 @@ class LinearAlgebra:
 	
 
 	def times(self, a, b):
+
+		# Se duas matrizes forem multiplicadas.
+
 		if isinstance(a, Matrix) and isinstance(b, Matrix):
-			# TODO: fazer a checagem
+			rows_a = len(a.get_matrix())
+			cols_a = len(a.get_matrix()[0])
+
+			rows_b = len(b.get_matrix())
+			cols_b = len(b.get_matrix()[0])
+
+			if rows_b != cols_a:
+				raise ValueError("Erro: Matrizes não encaixam para multiplicação! Estude mais!")
+
 			result = []
 			rows = a.rows
 			cols = b.cols
@@ -159,14 +172,63 @@ class LinearAlgebra:
 
 			return Matrix(len(result), len(result[0]), result)
 
+		# Se uma escalar for multiplicada por uma matriz
+
+		elif isinstance(a, (int, float)) and isinstance(b, Matrix):
+			rows_b = len(b.get_matrix())
+			cols_b = len(b.get_matrix()[0])
+
+			for i in range(rows_b):
+				for j in range(cols_b):
+					b.set(i, j, b.get(i, j) * a)
+
+			return b
+		
+		# Se uma escalar for multiplicada por um vetor
+		
+		elif isinstance(a, (int, float)) and isinstance(b, Vector):
+			rows_b = len(b.get_elements())
+
+			for i in range(rows_b):
+				for j in range(cols_b):
+					b.set(i, j, b.get(i, j) * a)
+
+			return b
+		
+		elif isinstance(a, Matrix) and isinstance(b, Vector):
+			rows_a = len(a.get_matrix())
+			cols_a = len(a.get_matrix()[0])
+
+			rows_b = len(b.get_elements())
+
+			if cols_a != rows_b:
+				raise ValueError("Erro: Matriz fornecida não possui número de colunas igual ao número de linhas do vetor. Estude mais!")
+			
+			result = []
+			for _ in range(rows_a):
+				result.append(0)
+			
+			print(b.get_elements())
+			for i in range(rows_a):
+				for j in range(cols_a):
+					result[i] += a.get_matrix()[i][j] * b.get_elements()[j]
+
+			return Matrix(len(result), 1, result)
+		
+		# Se nenhuma dessas combinações for fornecida
+		else:
+			raise ValueError("Erro: Talvez não esteja multiplicando na ordem certa. (Escalar x Matriz/Vetor), (Matriz x Vetor)")
 	
 	def print_matrix(self, matrix):
 		for row in matrix.get_matrix():
 			print(row)
 
+	def print_vector(self, vector):
+		print(vector.get_elements())
+
 linear = LinearAlgebra()
-# minha_matriz = Matrix(len(A), len(A[0]), A)
-# minha_matriz2 = Matrix(len(B), len(B[0]), B)
+minha_matriz = Matrix(len(A), len(A[0]), A)
+minha_matriz2 = Matrix(len(B), len(B[0]), B)
 
 # # linear.print_matrix(linear.gauss(minha_matriz))
 
@@ -178,4 +240,5 @@ linear = LinearAlgebra()
 meu_vetor1 = Vector(3, [1, 2, 3])
 meu_vetor2 = Vector(3, [3, 2, 1])
 
-linear.sum(meu_vetor1, meu_vetor2)
+# linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
+linear.print_matrix(linear.times(minha_matriz, meu_vetor1))
