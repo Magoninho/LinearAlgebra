@@ -2,8 +2,7 @@ class Vector:
 	def __init__(self, dim, elements) -> None:
 		self.dim = dim
 		if len(elements) > self.dim:
-			print("Número de elementos maior que a dimensão do vetor.")
-			return False
+			raise ValueError("Erro: Número de elementos maior que a dimensão do vetor.")
 		self.elements = elements
 	
 	def get(self, i):

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<style>
+		.reveal pre code {
+			max-height: max-content !important;
+			overflow: hidden !important;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section>
+					<h1>Cenário 1</h1>
+				</section>
+				<section>Equipe</section>
+				<section data-markdown>
+					- João Felipe Ribeiro
+					- Matheus Vasconselos
+					- Samir Albano 
+					- Maria Karime Nóbrega
+					- Erich Lima Schlaepfer
+				</section>
+			</section>
+
+			<section>
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"
+					width="300" style="float: left;">
+				<h1 style="text-align: right;">Biblioteca de Álgebra Linear em Python</h1>
+			</section>
+
+
+
+
+			<section>
+				<section>
+					<h2>Classe <code>Matrix</code></h2>
+				</section>
+				<section data-auto-animate>
+					<pre data-id="code-animation"><code data-trim data-line-numbers>
+class Matrix:
+	def __init__(self, rows, cols, elements) -> None:
+		self.rows = rows
+		self.cols = cols
+		self.matrix = elements
+
+	def get(self, i, j):
+		return self.matrix[i][j]
+
+	def set(self, i, j, value):
+		self.matrix[i][j] = value
+						</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="code-animation"><code data-trim data-line-numbers>
+class Matrix:
+	def __init__(self, rows, cols, elements) -> None:
+		self.rows = rows
+		self.cols = cols
+		self.matrix = elements
+
+	def get(self, i, j):
+		return self.matrix[i][j]
+
+	def get_matrix(self):
+		return self.matrix
+	
+	def set(self, i, j, value):
+		self.matrix[i][j] = value
+						</code></pre>
+
+					<p>Tivemos que implementar esse método <code>get_matrix</code> para poder realizar testes de
+						depuração mais facilmente.</p>
+				</section>
+
+			</section>
+
+
+
+
+
+			<section>
+
+				<section>
+					<h2>Classe <code>Vector</code></h2>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="code-animation"><code data-trim data-line-numbers>
+class Vector:
+	def __init__(self, dim, elements) -> None:
+		self.dim = dim
+		if len(elements) > self.dim:
+			print("Número de elementos maior que a dimensão do 
+			vetor.")
+			return False
+		self.elements = elements
+	
+	def get(self, i):
+		return self.elements[i]
+
+	def set(self, i, value):
+		self.elements[i] = value
+						</code></pre>
+				</section>
+				<section data-auto-animate>
+					<pre data-id="code-animation"><code data-trim data-line-numbers>
+class Vector:
+	def __init__(self, dim, elements) -> None:
+		self.dim = dim
+		if len(elements) > self.dim:
+			print("Número de elementos maior que a dimensão do 
+			vetor.")
+			return False
+		self.elements = elements
+	
+	def get(self, i):
+		return self.elements[i]
+
+	def get_elements(self):
+		return self.elements
+
+	def set(self, i, value):
+		self.elements[i] = value
+						</code></pre>
+					<p style="font-size: large;">Também tivemos que implementar esse método <code>get_elements</code> para poder realizar testes
+						de depuração mais facilmente.</p>
+				</section>
+
+
+			</section>
+
+
+
+			<section>
+				<section><h2>Classe<br><code>LinearAlgebra</code></h2></section>
+				<section><p>A classe atingiu 272 linhas escritas.</p></section>
+				
+			</section>
+
+			<section>
+				<section data-markdown>
+					# Todos os Métodos
+					---
+					`transpose(a)`
+					---
+					`sum(a, b)`
+					---
+					`times(a, b)`
+					---
+					`dot(a, b)`
+					---
+					`gauss(a)`
+					---
+					`solve(a)`
+					---
+					`print_matrix()`
+					---
+					`print_vector()`
+				</section>
+			</section>
+			<section data-background-color="darkgreen">
+				<h1>Obrigado pela atenção</h1>
+			</section>
+
+
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			autoAnimateEasing: 'ease-out',
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>

@@ -15,17 +15,19 @@ B = [
 
 class LinearAlgebra:
 	def transpose(self, a):
-		rows = len(a)
-		cols = len(a[0])
+		rows = a.rows
+		cols = a.cols
 
-		temp = a.copy()
-		for i in range(rows):
-			temp[i] = a[i].copy()
-			for j in range(cols):
-				a[i][j] = temp[j][i]
 
-		return a
-
+		result = []
+		for i in range(cols):
+			result.append([])
+			for j in range(rows):
+				result[i].append(a.get(j, i))
+		
+		
+		return Matrix(rows, cols, result)
+	
 	def sum(self, a, b):
 
 		# Se forem dois vetores sendo somados
@@ -56,7 +58,7 @@ class LinearAlgebra:
 			rows_b = len(b.get_matrix())
 			cols_b = len(b.get_matrix()[0])
 
-			if rows_a != rows_b and cols_a != cols_b:
+			if rows_a != rows_b or cols_a != cols_b:
 				raise ValueError("Erro: Matrizes com ordens diferentes! Estude mais!")
 
 			# Somando os elementos
@@ -199,13 +201,6 @@ class LinearAlgebra:
 	
 
 	def times(self, a, b) -> Matrix | Vector:
-		"""
-		matriz - matriz (v)
-		matriz - vetor (v)
-		escalar - matriz (v)
-		escalar - vetor (v)
-
-		"""
 		# Se duas matrizes forem multiplicadas elemento a elemento
 
 		if isinstance(a, Matrix) and isinstance(b, Matrix):
@@ -286,19 +281,19 @@ class LinearAlgebra:
 	def print_vector(self, vector):
 		print(vector.get_elements())
 
-linear = LinearAlgebra()
-minha_matriz = Matrix(len(A), len(A[0]), A)
-minha_matriz2 = Matrix(len(B), len(B[0]), B)
+# linear = LinearAlgebra()
+# minha_matriz = Matrix(len(A), len(A[0]), A)
+# minha_matriz2 = Matrix(len(B), len(B[0]), B)
 
-# # linear.print_matrix(linear.gauss(minha_matriz))
+# # # linear.print_matrix(linear.gauss(minha_matriz))
 
-# linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
+# # linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
 
-# # print(linear.sum(minha_matriz.get_matrix(), minha_matriz2.get_matrix()).get_matrix())
+# # # print(linear.sum(minha_matriz.get_matrix(), minha_matriz2.get_matrix()).get_matrix())
 
 
-meu_vetor1 = Vector(3, [1, 2, 3])
-meu_vetor2 = Vector(3, [3, 2, 1])
+# meu_vetor1 = Vector(3, [1, 2, 3])
+# meu_vetor2 = Vector(3, [3, 2, 1])
 
-# linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
-linear.print_vector(linear.times(2, meu_vetor1))
+# # linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
+# linear.print_vector(linear.times(2, meu_vetor1))
