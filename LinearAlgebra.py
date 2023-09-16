@@ -280,20 +280,3 @@ class LinearAlgebra:
 
 	def print_vector(self, vector):
 		print(vector.get_elements())
-
-# linear = LinearAlgebra()
-# minha_matriz = Matrix(len(A), len(A[0]), A)
-# minha_matriz2 = Matrix(len(B), len(B[0]), B)
-
-# # # linear.print_matrix(linear.gauss(minha_matriz))
-
-# # linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
-
-# # # print(linear.sum(minha_matriz.get_matrix(), minha_matriz2.get_matrix()).get_matrix())
-
-
-# meu_vetor1 = Vector(3, [1, 2, 3])
-# meu_vetor2 = Vector(3, [3, 2, 1])
-
-# # linear.print_matrix(linear.times(minha_matriz, minha_matriz2))
-# linear.print_vector(linear.times(2, meu_vetor1))
