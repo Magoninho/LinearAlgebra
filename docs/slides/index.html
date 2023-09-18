@@ -9,10 +9,10 @@
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
-	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="dist/theme/white.css">
 
 	<!-- Theme used for syntax highlighted code -->
-	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="plugin/highlight/atom-one-light.min.css">
 
 	<style>
 		.reveal pre code {
@@ -108,9 +108,7 @@ class Vector:
 	def __init__(self, dim, elements) -> None:
 		self.dim = dim
 		if len(elements) > self.dim:
-			print("Número de elementos maior que a dimensão do 
-			vetor.")
-			return False
+			raise ValueError("Erro: Número de elementos maior que a dimensão do vetor.")
 		self.elements = elements
 	
 	def get(self, i):
@@ -126,9 +124,7 @@ class Vector:
 	def __init__(self, dim, elements) -> None:
 		self.dim = dim
 		if len(elements) > self.dim:
-			print("Número de elementos maior que a dimensão do 
-			vetor.")
-			return False
+			raise ValueError("Erro: Número de elementos maior que a dimensão do vetor.")
 		self.elements = elements
 	
 	def get(self, i):
@@ -176,8 +172,8 @@ class Vector:
 					`print_vector()`
 				</section>
 			</section>
-			<section data-background-color="darkgreen">
-				<h1>Obrigado pela atenção</h1>
+			<section data-background-color="beige">
+				<p style="font-family: serif; font-size: 48pt;">Obrigado pela atenção 🤓</p>
 			</section>
 
 
