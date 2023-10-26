@@ -258,7 +258,7 @@
 				</section>
 
 				<section>
-					<p>Gráfico (Usando o GeoGebra)</p>
+					<p>Gráfico</p>
 					<img src="images/rotation3dx_graph.png">
 				</section>
 
@@ -311,7 +311,7 @@
 				</section>
 
 				<section>
-					<p>Gráfico (Usando o GeoGebra)</p>
+					<p>Gráfico</p>
 					<img src="images/rotation3dy_graph.png">
 				</section>
 
@@ -364,7 +364,7 @@
 				</section>
 
 				<section>
-					<p>Gráfico (Usando o GeoGebra)</p>
+					<p>Gráfico</p>
 					<img src="images/rotation3dz_graph.png">
 				</section>
 
@@ -503,13 +503,421 @@
 				</section>
 
 				<section>
-					<p>Gráfico (Usando o GeoGebra)</p>
+					<p>Gráfico</p>
 					<img src="images/reflection3dx_graph.png">
 				</section>
 
 			</section>
 
 			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>reflection3DY()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def reflection3DY(vector):
+								reflection_matrix = np.array([
+									[1, 0, 0],
+									[0,-1, 0],
+									[0, 0, 1]
+								])
+
+								return np.matmul(reflection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 2, 3]
+							
+							# Reflito esse vetor em relação ao eixo y
+							reflected_vector = Transformations.reflection3DY(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Gráfico</p>
+					<img src="images/reflection3dy_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>reflection3DZ()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def reflection3DZ(vector):
+								reflection_matrix = np.array([
+									[1, 0, 0],
+									[0, 1, 0],
+									[0, 0,-1]
+								])
+
+								return np.matmul(reflection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 2, 3]
+							
+							# Reflito esse vetor em relação ao eixo z
+							reflected_vector = Transformations.reflection3DZ(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Gráfico</p>
+					<img src="images/reflection3dz_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>project2DX()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def project2DX(vector):
+								projection_matrix = np.array([
+									[1, 0],
+									[0, 0],
+								])
+
+								return np.matmul(projection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 2]
+							
+							# Projeto esse vetor em relação ao eixo x
+							projected_vector = Transformations.project2DX(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/projection2dx.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>project2DY()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def project2DY(vector):
+								projection_matrix = np.array([
+									[0, 0],
+									[0, 1],
+								])
+
+								return np.matmul(projection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 2]
+							
+							# Projeto esse vetor em relação ao eixo y
+							projected_vector = Transformations.project2DY(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/projection2dy.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+			
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>project3DXY()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def project3DXY(vector):
+								projection_matrix = np.array([
+									[1, 0, 0],
+									[0, 1, 0],
+									[0, 0, 0],
+								])
+
+								return np.matmul(projection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 2, 2]
+
+							# Projeto esse vetor no plano xy
+							projected_vector = Transformations.project3DXY(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Gráfico</p>
+					<img src="images/projection3dxy.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+			
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>project3DYZ()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def project3DYZ(vector):
+								projection_matrix = np.array([
+									[0, 0, 0],
+									[0, 1, 0],
+									[0, 0, 1],
+								])
+
+								return np.matmul(projection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 2, 2]
+							
+							# Projeto esse vetor no plano yz
+							rotated_vector = Transformations.project3DYZ(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Gráfico</p>
+					<img src="images/projection3dyz.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+			
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>project3DXZ()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def project3DXZ(vector):
+								projection_matrix = np.array([
+									[1, 0, 0],
+									[0, 0, 0],
+									[0, 0, 1],
+								])
+						
+								return np.matmul(projection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 2, 2]
+							
+							# Projeto esse vetor no plano xz
+							rotated_vector = Transformations.project3DXZ(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Gráfico</p>
+					<img src="images/projection3dxz.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>shearing()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def shearing(vector, kx, ky):
+								shearing_matrix = np.array([
+									[1, kx],
+									[ky, 1],
+								])
+						
+								return np.matmul(shearing_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo 1
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 1]
+							
+							# Realizo um cisalhamento na direção do eixo x (kx = 2)
+							sheared_vector = Transformations.shearing(meu_vetor, 2, 0)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/shearingx.png">
+				</section>
+
+				<section>
+					Exemplo 2
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 1]
+							
+							# Realizo um cisalhamento na direção do eixo y (ky = 2)
+							sheared_vector = Transformations.shearing(meu_vetor, 0, 2)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/shearingy.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+
+
+
+
+
+
+
+			<section data-background-color="beige">
+				<p style="font-family: serif; font-size: 48pt;">Obrigado pela atenção 🤓</p>
+			</section>
+
+
 
 		</div>
 	</div>

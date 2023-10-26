@@ -12,7 +12,7 @@ meu_vetor = [1, 1]
 VectorRenderer.plot(meu_vetor, color='blue')
 
 # Realizo um cisalhamento na direção do eixo x
-sheared_vector = Transformations.shearing(meu_vetor, 2, 0)
+sheared_vector = Transformations.shearing(meu_vetor, 0, 2)
 
 # Renderizo esse vetor refletido na cor vermelha
 VectorRenderer.plot(sheared_vector, color='red')

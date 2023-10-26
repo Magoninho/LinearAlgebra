@@ -11,7 +11,7 @@ meu_vetor = [2, 2]
 # Renderizo esse vetor na cor azul
 VectorRenderer.plot(meu_vetor, color='blue')
 
-# Projeto esse vetor em relação ao eixo x
+# Projeto esse vetor em relação ao eixo y
 projected_vector = Transformations.project2DY(meu_vetor)
 
 # Renderizo esse vetor refletido na cor vermelha

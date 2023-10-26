@@ -143,7 +143,17 @@ class Transformations:
 		return np.matmul(projection_matrix, vector)
 
 	@staticmethod
-	def project3DX(vector):
+	def project3DXY(vector):
+		projection_matrix = np.array([
+			[1, 0, 0],
+			[0, 1, 0],
+			[0, 0, 0],
+		])
+
+		return np.matmul(projection_matrix, vector)
+	
+	@staticmethod
+	def project3DYZ(vector):
 		projection_matrix = np.array([
 			[0, 0, 0],
 			[0, 1, 0],
@@ -152,22 +162,13 @@ class Transformations:
 
 		return np.matmul(projection_matrix, vector)
 
+
 	@staticmethod
-	def project3DY(vector):
+	def project3DXZ(vector):
 		projection_matrix = np.array([
 			[1, 0, 0],
 			[0, 0, 0],
 			[0, 0, 1],
-		])
-
-		return np.matmul(projection_matrix, vector)
-
-	@staticmethod
-	def project3DZ(vector):
-		projection_matrix = np.array([
-			[1, 0, 0],
-			[0, 1, 0],
-			[0, 0, 0],
 		])
 
 		return np.matmul(projection_matrix, vector)
