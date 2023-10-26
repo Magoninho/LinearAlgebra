@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/atom-one-light.min.css">
+
+	<style>
+		.reveal pre code {
+			max-height: max-content !important;
+			overflow: hidden !important;
+
+		}
+
+		.reveal pre {
+			width: max-content;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section>
+					<h1>Cenário 2</h1>
+				</section>
+				<section>Equipe</section>
+				<section data-markdown>
+					- João Felipe Ribeiro
+					- Matheus Vasconselos
+					- Samir Albano
+					- Maria Karime Nóbrega
+					- Erich Lima Schlaepfer
+				</section>
+			</section>
+
+			<section>
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"
+					width="250" style="float: left;">
+				<h2 style="text-align: left;">Biblioteca de Transformações Lineares em PYTHON</h2>
+			</section>
+
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>translate2D()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def translate2D(vector, dx, dy):
+								homogeneous_vector = vector.copy()
+								homogeneous_vector.append(1)
+
+								translation_matrix = np.array([
+									[1, 0, dx],
+									[0, 1, dy],
+									[0, 0, 1]
+								])
+
+								return np.delete(
+									np.matmul(translation_matrix, homogeneous_vector), 
+									-1
+								)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 2] # Em azul
+							
+							# Translaciono esse vetor em 2 dx e 1 dy
+							translated_vector = Transformations.translate2D(meu_vetor, 2, 1)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/translation2d.png">
+					<p style="font-size: 16pt;">Imagem gerada por meio da biblioteca <img src="https://d33wubrfki0l68.cloudfront.net/e33fd6f372aa5d51e7b0de4bd763bd983251881e/4b0f4/blog/customising-matplotlib/matplot_title_logo.png" width="180px" style="margin: 0; vertical-align: middle;"> do Python
+					</p>
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>translate3D()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def translate3D(vector, dx, dy, dz):
+								homogeneous_vector = vector.copy()
+								homogeneous_vector.append(1)
+								
+								translation_matrix = np.array([
+									[1, 0, 0, dx],
+									[0, 1, 0, dy],
+									[0, 0, 1, dz],
+									[0, 0, 0, 1]
+								])
+
+								return np.delete(
+									np.matmul(translation_matrix, homogeneous_vector),
+									-1
+								)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [3, 2, 1]
+							
+							# Translaciono esse vetor em 1 dx, 1 dy e 2 dz
+							translated_vector = Transformations.translate3D(meu_vetor, 1, 1, 2)
+							```
+					</textarea>
+
+				</section>
+
+				<section data-background-color="rgb(40,44,52)">
+					<p>Resultado</p>
+					<img src="images/translation3d.png" width="200%">
+				</section>
+
+				<section>
+					<p>Gráfico (Usando o GeoGebra)</p>
+					<img src="images/translation3d_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>rotation2D()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def rotation2D(vector, angle):
+								angle_radians = math.radians(angle)
+								rotation_matrix = np.array([
+									[math.cos(angle_radians), -math.sin(angle_radians)],
+									[math.sin(angle_radians), math.cos(angle_radians)]
+								])
+
+								return np.matmul(rotation_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [4, 0]
+							
+							# Rotaciono esse vetor em 45 graus
+							rotated_vector = Transformations.rotation2D(meu_vetor, 45)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/rotation2d.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>rotation3DX()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def rotation3DX(vector, angle):
+								angle_radians = math.radians(angle)
+								rotation_matrix = np.matrix([
+									[1, 0, 0],
+									[0, math.cos(angle_radians), -math.sin(angle_radians)],
+									[0, math.sin(angle_radians), math.cos(angle_radians)]
+								])
+
+								return np.matmul(rotation_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 1, 2]
+							
+							# Rotaciono esse vetor em 90 graus em torno do eixo x
+							rotated_vector = Transformations.rotation3DX(meu_vetor, 90)
+							```
+					</textarea>
+
+				</section>
+
+				<section data-background-color="rgb(40,44,52)">
+					<p>Resultado</p>
+					<img src="images/rotation3dx.png" width="200%">
+				</section>
+
+				<section>
+					<p>Gráfico (Usando o GeoGebra)</p>
+					<img src="images/rotation3dx_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>rotation3DY()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def rotation3DY(vector, angle):
+								angle_radians = math.radians(angle)
+								rotation_matrix = np.matrix([
+									[math.cos(angle_radians), 0, math.sin(angle_radians)],
+									[0, 1, 0],
+									[-math.sin(angle_radians), 0, math.cos(angle_radians)]
+								])
+
+								return np.matmul(rotation_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 1, 2]
+							
+							# Rotaciono esse vetor em 90 graus em torno do eixo y
+							rotated_vector = Transformations.rotation3DY(meu_vetor, 90)
+							```
+					</textarea>
+
+				</section>
+
+				<section data-background-color="rgb(40,44,52)">
+					<p>Resultado</p>
+					<img src="images/rotation3dy.png" width="200%">
+				</section>
+
+				<section>
+					<p>Gráfico (Usando o GeoGebra)</p>
+					<img src="images/rotation3dy_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>rotation3DZ()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def rotation3DZ(vector, angle):
+								angle_radians = math.radians(angle)
+								rotation_matrix = np.matrix([
+									[math.cos(angle_radians), -math.sin(angle_radians), 0],
+									[math.sin(angle_radians), math.cos(angle_radians), 0],
+									[0, 0, 1]
+								])
+
+								return np.matmul(rotation_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [2, 1, 2]
+							
+							# Rotaciono esse vetor em 90 graus em torno do eixo z
+							rotated_vector = Transformations.rotation3DZ(meu_vetor, 90)
+							```
+					</textarea>
+
+				</section>
+
+				<section data-background-color="rgb(40,44,52)">
+					<p>Resultado</p>
+					<img src="images/rotation3dz.png" width="200%">
+				</section>
+
+				<section>
+					<p>Gráfico (Usando o GeoGebra)</p>
+					<img src="images/rotation3dz_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+			
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>reflection2DX()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def reflection2DX(vector):
+								reflection_matrix = np.array([
+									[1,  0],
+									[0, -1]
+								])
+
+								return np.matmul(reflection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 2]
+							
+							# Reflito esse vetor em relação ao eixo x
+							reflected_vector = Transformations.reflection2DX(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/reflection2dx.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+			
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>reflection2DY()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def reflection2DY(vector):
+								reflection_matrix = np.array([
+									[-1, 0],
+									[ 0, 1]
+								])
+
+								return np.matmul(reflection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 2]
+							
+							# Reflito esse vetor em relação ao eixo y
+							reflected_vector = Transformations.reflection2DY(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Resultado</p>
+					<img src="images/reflection2dy.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+			<!-- Inicio do modelo de slide para metodos -->
+			<section>
+				<section>
+					<h2>Método <code>reflection3DX()</code></h2>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							def reflection3DX(vector):
+								reflection_matrix = np.array([
+									[-1, 0, 0],
+									[ 0, 1, 0],
+									[ 0, 0, 1]
+								])
+
+								return np.matmul(reflection_matrix, vector)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					Exemplo
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+							```python [1:]
+							# Declaro um vetor
+							meu_vetor = [1, 2, 3]
+							
+							# Reflito esse vetor em relação ao eixo x
+							reflected_vector = Transformations.reflection3DX(meu_vetor)
+							```
+					</textarea>
+
+				</section>
+
+				<section>
+					<p>Gráfico (Usando o GeoGebra)</p>
+					<img src="images/reflection3dx_graph.png">
+				</section>
+
+			</section>
+
+			<!-- Fim do modelo de slides para metodos -->
+
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			autoAnimateEasing: 'ease-out',
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
